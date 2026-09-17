@@ -275,7 +275,11 @@ public class EEGModel {
 		} else {
 			EEGModel eeg = new EEGModel();
 			eeg.createSyntheticData(1000);
-			// TODO
+			try {
+				eeg.saveFile("Synthetic.txt");
+			} catch (IOException e) {
+				System.out.println("The file can´t be written");
+			}
 			
 		}
 	}
