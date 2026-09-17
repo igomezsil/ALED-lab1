@@ -128,9 +128,32 @@ public class EEGModel {
 	 * @throws IOException Thrown if the file can't be written.
 	 */
 	public void saveFile(String fileName) throws IOException {
-		// TODO
-		
-	}
+		File f = new File(fileName);
+		FileOutputStream fos = new FileOutputStream(f);
+		PrintStream ps = new PrintStream(fos);
+		try {
+			ps.println("%OpenBCI Raw EEG Data");
+			ps.println("%");
+			ps.println("%Sample Rate = 250.Hz");
+			ps.println("%First Column = SampleIndex");
+			ps.println("Other Columns = EEG data in microvolts with optional columns at end being unscaled Aux data");
+			
+			for (int i =0; i<measurements.size(); i++) {
+				Measurement m = measurements.get(i);
+				ps.print(i%256);
+				for(int channel = 0; channel<m.numChannels(); channel ++) {
+					ps.print(", ");
+					ps.print(String.format("%.2f", m.getChannel(channel)));
+				}	
+			}	
+			ps.println();
+		} finally {
+			ps.close();
+		}
+	}	
+			
+	
+	
 
 	/**
 	 * Plots the data of the EEGModel using the classes in the es.upm.aled.lab1.gui
