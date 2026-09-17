@@ -57,8 +57,6 @@ public class EEGModel {
 	 */
 	public EEGModel(Measurement[] measurements) {
 		Measurement [] measurementsA = new Measurement [measurements.length];
-		// TODO
-		
 	}
 
 	/**
@@ -90,9 +88,8 @@ public class EEGModel {
 	 * @return The new EEGModel.
 	 */
 	public EEGModel filter(Filter filter) {
-		// TODO
-		
-		return null;
+		EEGModel filteredEEGModel = filter.applyFilter(this);
+		return filteredEEGModel;
 	}
 
 	/**
