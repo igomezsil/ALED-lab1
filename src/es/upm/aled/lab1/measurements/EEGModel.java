@@ -56,7 +56,9 @@ public class EEGModel {
 	 * @param measurements The Measurements that make up the EEGModel.
 	 */
 	public EEGModel(Measurement[] measurements) {
-		Measurement [] measurementsA = new Measurement [measurements.length];
+		for (Measurement m : measurements) {
+			this.measurements.add(m);
+		}
 	}
 
 	/**
@@ -270,8 +272,6 @@ public class EEGModel {
 		if (args.length > 0) {
 			EEGModel eeg = new EEGModel(args[0]);
 			eeg.plotData();
-			// TODO
-			
 		} else {
 			EEGModel eeg = new EEGModel();
 			eeg.createSyntheticData(1000);
